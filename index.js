@@ -3,6 +3,7 @@ var gutil = require('gulp-util');
 var through = require('through2');
 var Checker = require('jscs');
 var loadConfigFile = require('jscs/lib/cli-config');
+var omit = require('lodash.omit');
 
 module.exports = function (options) {
 	var out = [];
@@ -11,8 +12,7 @@ module.exports = function (options) {
 	checker.registerDefaultRules();
 
 	if (typeof options === 'object') {
-		delete options.esnext;
-		checker.configure(options);
+		checker.configure(omit(options, ['esnext']));
 	} else {
 		checker.configure(loadConfigFile.load(options));
 	}
