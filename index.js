@@ -45,7 +45,8 @@ module.exports = function (options) {
 		cb(null, file);
 	}, function (cb) {
 		if (out.length > 0) {
-			this.emit('error', new gutil.PluginError('gulp-jscs', out.join('\n\n'), {
+			console.log(out.join('\n\n'));
+			this.emit('error', new gutil.PluginError('gulp-jscs', 'Code style errors found.', {
 				showStack: false
 			}));
 		}
